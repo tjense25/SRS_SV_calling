@@ -8,7 +8,6 @@ outdir = config["results_dir"]
 
 localrules: all 
 
-samples=['UDN467147','UDN054366']
 rule all:
 	input:
 		join(outdir, config["cohort_name"] + ".hg38.pop_SVs.paragraph_genotyped.vcf.gz"),
@@ -178,7 +177,7 @@ rule paragraph_genotype:
 		bcftools sort -Oz -o {output.vcf} tmp/genotypes.vcf.gz
 		bcftools index --tbi {output.vcf}
 
-		#rm -rf {params.tmp_dir}
+		rm -rf {params.tmp_dir}
 	"""
 		
 rule merge_genotypes:
@@ -197,5 +196,3 @@ rule merge_genotypes:
 		bcftools merge -Oz -o {output.vcf} {input}
 		bcftools index -f --tbi {output.vcf}
 	"""
-
-

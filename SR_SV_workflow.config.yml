@@ -1,11 +1,11 @@
-cohort_name: UDN_SR_SVs
+cohort_name: ADRC
 read_length: 150
 mean_coverage: 50
-sample_table: /oak/stanford/groups/euan/projects/tannerj/short_read_SV_workflow/sample_bams.txt
-project_dir: /oak/stanford/groups/euan/projects/tannerj/short_read_SV_workflow
-results_dir: /oak/stanford/groups/euan/projects/tannerj/short_read_SV_workflow/results
+sample_table: /scratch/working_dir/short_read_SV_workflow/sample_bams.txt
+project_dir: /scratch/working_dir/short_read_SV_workflow/
+results_dir: /scratch/working_dir/short_read_SV_workflow/results
 
 references:
-    hg38: /oak/stanford/groups/euan/projects/tannerj/short_read_SV_workflow/references/hg38.full_analysis_set.fasta
+    hg38: /data/references/hg38.full_analysis_set.fasta
 
-threads: 1
+threads: 8
