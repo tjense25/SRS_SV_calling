@@ -1,0 +1,9 @@
+name: manta
+channels:
+    - conda-forge
+    - bioconda
+dependencies:
+    - manta
+    - tabix
+    - bcftools
+    - samtools 

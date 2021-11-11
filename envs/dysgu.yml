@@ -1,0 +1,23 @@
+name: dysgu
+channels:
+    - bioconda
+    - conda-forge
+    - anaconda
+dependencies:
+    - pip
+    - tabix
+    - bcftools
+    - numpy
+    - pysam
+    - pandas
+    - cython
+    - click
+    - scikit-learn
+    - scikit-bio
+    - networkx
+    - ncls
+    - edlib
+    - sortedcontainers
+    - lightgbm
+    - pip:
+        - dysgu

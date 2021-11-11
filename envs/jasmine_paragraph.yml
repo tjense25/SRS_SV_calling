@@ -1,0 +1,10 @@
+name: jasmine
+channels:
+    - bioconda
+    - conda-forge
+dependencies:
+    - bcftools
+    - bedtools
+    - jasminesv
+    - paragraph
+    - duphold
