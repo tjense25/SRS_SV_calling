@@ -16,11 +16,11 @@ rule all:
 	input:
 		#expand("/oak/stanford/groups/euan/projects/tannerj/short_read_SV_workflow/results/merged/{sample}.hg38.diploidSV.merged.vcf.gz",
 		#	sample = samples),
-		expand("/oak/stanford/groups/euan/projects/tannerj/short_read_SV_workflow/results/merged/{sample}.hg38.diploidSV.merged.stats.txt",
-			sample = samples),
+		#expand("/oak/stanford/groups/euan/projects/tannerj/short_read_SV_workflow/results/merged/{sample}.hg38.diploidSV.merged.stats.txt",
+		#	sample = samples),
 		#join(outdir, "merged", config["cohort_name"] + ".hg38.LR_overlap.counts.merged.txt"),
 		join(outdir, config["cohort_name"] + ".COHORT_MERGED.hg38.short_read_wgs.SVs.vcf"),
-		#join(outdir, config["cohort_name"] + ".hg38.pop_SVs.paragraph_genotyped.vcf.gz"),
+		join(outdir, config["cohort_name"] + ".hg38.pop_SVs.paragraph_genotyped.vcf.gz"),
 
 rule mantaSV:
 	threads: 4
