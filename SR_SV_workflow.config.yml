@@ -1,11 +1,17 @@
-cohort_name: ADRC
+cohort_name: UDN
 read_length: 150
-mean_coverage: 50
-sample_table: /scratch/working_dir/short_read_SV_workflow/sample_bams.txt
-project_dir: /scratch/working_dir/short_read_SV_workflow/
-results_dir: /scratch/working_dir/short_read_SV_workflow/results
+mean_coverage: 40
+sample_table: /oak/stanford/groups/euan/projects/tannerj/short_read_SV_workflow/udn_wgs_bams.hg38.txt
+project_dir: /oak/stanford/groups/euan/projects/tannerj/short_read_SV_workflow
+results_dir: /oak/stanford/groups/euan/projects/tannerj/short_read_SV_workflow/results
 
 references:
-    hg38: /data/references/hg38.full_analysis_set.fasta
+    hg38: 
+        fasta: /oak/stanford/groups/euan/projects/tannerj/short_read_SV_workflow/references/GRCh38_full_analysis_set_plus_decoy_hla.fa
+        dict: /oak/stanford/groups/euan/projects/tannerj/short_read_SV_workflow/references/GRCh38_full_analysis_set_plus_decoy_hla.dict
+        mappability: /oak/stanford/groups/euan/projects/tannerj/short_read_SV_workflow/references/GRCh38.k100.mappability.bed.gz
+        segdup: /oak/stanford/groups/euan/projects/tannerj/short_read_SV_workflow/references/GRCh38/SegmentalDuplications/GRCh38_segdups.bed.gz
 
-threads: 8
+stratify_region: /oak/stanford/groups/euan/projects/tannerj/short_read_SV_workflow/references/GRCh38/union/GRCh38_notinalllowmapandsegdupregions.bed.gz
+ploid_priors: /oak/stanford/groups/euan/projects/tannerj/short_read_SV_workflow/references/ploidy_priors.txt
+threads: 16
