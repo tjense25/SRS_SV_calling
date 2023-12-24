@@ -19,8 +19,12 @@ rule all:
 		#expand("/oak/stanford/groups/euan/projects/tannerj/short_read_SV_workflow/results/merged/{sample}.hg38.diploidSV.merged.stats.txt",
 		#	sample = samples),
 		#join(outdir, "merged", config["cohort_name"] + ".hg38.LR_overlap.counts.merged.txt"),
-		join(outdir, config["cohort_name"] + ".COHORT_MERGED.hg38.short_read_wgs.SVs.vcf"),
-		join(outdir, config["cohort_name"] + ".hg38.pop_SVs.paragraph_genotyped.vcf.gz"),
+		#join(outdir, config["cohort_name"] + ".COHORT_MERGED.hg38.short_read_wgs.SVs.vcf"),
+		#join(outdir, config["cohort_name"] + ".hg38.pop_SVs.paragraph_genotyped.vcf.gz"),
+		expand("{outdir}/expansionhunter/{sample}.{ref_name}.expansionhunter.tandemrepeats.tsv",
+				outdir=outdir,
+				sample=LR_samples,
+				ref_name="hg38")
 
 rule mantaSV:
 	threads: 4
@@ -296,3 +300,45 @@ rule merge_genotypes:
 		bcftools merge -Oz -o {output.vcf} {input}
 		bcftools index -f --tbi {output.vcf}
 	"""
+
+rule expansionhunter:
+	threads: 16
+	resources:
+		mem=72,
+		time=24
+	input:
+		fasta = lambda w: config["references"][w.ref_name]['fasta'],
+		bam = lambda w: sample_bam_dict[w.sample]
+	params:
+		str_catalog = lambda w: config["STR_catalog"][w.ref_name],
+		prefix = join(outdir,"expansionhunter/{sample}.{ref_name}.expansionhunter.tandemrepeats")
+	output:
+		vcf = join(outdir, "expansionhunter/{sample}.{ref_name}.expansionhunter.tandemrepeats.vcf"),
+		json = join(outdir, "expansionhunter/{sample}.{ref_name}.expansionhunter.tandemrepeats.json"),
+
+	conda: 'envs/expansionhunter.yaml' 
+	shell: """
+		ExpansionHunter --reads {input.bam} \
+			--threads {threads} \
+			--reference {input.fasta} \
+			--variant-catalog {params.str_catalog} \
+			--output-prefix {params.prefix} \
+			--analysis-mode streaming
+  """
+
+rule convert_json_to_tsv:
+    threads: 1 
+    resources:
+        mem=12,
+        time=4
+    input:
+        join(outdir,"expansionhunter/{sample}.{ref_name}.expansionhunter.tandemrepeats.json")
+    output:
+        join(outdir,"expansionhunter/{sample}.{ref_name}.expansionhunter.tandemrepeats.tsv")
+    shell: """
+        python helper_scripts/tandem_repeat.convert_json_to_tsv.py {input} {wildcards.sample} | sort -k1,1 -k2,2 > {output}
+    """
+
+
+
+

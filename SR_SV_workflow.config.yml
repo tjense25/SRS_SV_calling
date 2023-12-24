@@ -12,6 +12,9 @@ references:
         mappability: /oak/stanford/groups/euan/projects/tannerj/short_read_SV_workflow/references/GRCh38.k100.mappability.bed.gz
         segdup: /oak/stanford/groups/euan/projects/tannerj/short_read_SV_workflow/references/GRCh38/SegmentalDuplications/GRCh38_segdups.bed.gz
 
+STR_catalog:
+  hg38: /oak/stanford/groups/euan/projects/tannerj/short_read_SV_workflow/references/ExpansionHunter.TR_catalog.json
+
 stratify_region: /oak/stanford/groups/euan/projects/tannerj/short_read_SV_workflow/references/GRCh38/union/GRCh38_notinalllowmapandsegdupregions.bed.gz
 ploid_priors: /oak/stanford/groups/euan/projects/tannerj/short_read_SV_workflow/references/ploidy_priors.txt
 threads: 16
