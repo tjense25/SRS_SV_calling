@@ -16,7 +16,7 @@ for line in sys.stdin:
 
 	INFO = { key_val[0] : None if len(key_val) == 1 else key_val[1] for key_val in map(lambda x: x.split('='), COLS[HEADER["INFO"]].split(';'))}
 
-	INFO_OUTFIELDS=["SVTYPE","SVLEN","END", "CHR2","END2","STRAND","READ_SUPPORT","SVMETHOD","IRIS_PROCESSED","IRIS_REFINED", "SUPP", "SUPP_VEC"]
+	INFO_OUTFIELDS=["SVTYPE","SVLEN","END", "CHR2","END2","STRAND","READ_SUPPORT","SVMETHOD","IRIS_PROCESSED","IRIS_REFINED", "SUPP", "SUPP_VEC","SVINSLEN","SVINSSEQ","LEFT_SVINSSEQ","RIGHT_SVINSSEQ"]
 	INFO_OUT ="PRECISE;" if "PRECISE" in INFO else "IMPRECISE;"
 	INFO_OUT += ";".join(['='.join([x,INFO[x]]) for x in INFO_OUTFIELDS if x in INFO])
 	COLS[HEADER["INFO"]]=INFO_OUT
